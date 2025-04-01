@@ -4,3 +4,4 @@ google-generativeai
 pytube
 googletrans==4.0.0-rc1
 gunicorn
+deep-translator
