@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Agriculture Portal</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.7); /* White with 70% opacity */
+        }
+        
+        
+        .header .controls {
+            display: flex;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px 0;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 60%;
+            max-width: 600px;
+        }
+        .close {
+            color: red;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            background: rgba(255, 255, 255, 0.7);;
+            border: 2px solid red;
+            border-radius: 50%;
+            padding: 5px;
+        }
+        .chat-messages div {
+            max-width: 80%;
+            padding: 8px;
+            margin: 5px;
+            border-radius: 5px;
+        }
+        .chat-messages .sent {
+            background:rgba(255, 255, 255, 0.3);;
+            align-self: flex-end;
+            text-align: right;
+        }
+        
+        /* Add these styles if not already present */
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+}
+
+.sent {
+    background:rgba(255, 255, 255, 0.3);;
+    align-self: flex-end;
+    text-align: right;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+.received {
+    background:rgba(255, 255, 255, 0.3);;
+    align-self: flex-start;
+    text-align: left;
+    border-radius: 5px;
+    padding: 8px;
+}
+
+        .chat-messages .received {
+            background:rgba(255, 255, 255, 0.3);;
+            align-self: flex-start;
+            text-align: left;
+        }
+            .universal-chat-modal-content {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start; /* Align content to the left */
+            }
+        
+            .universal-chat-modal-content textarea {
+                resize: none;
+                height: 80px; /* Reduced height */
+                width: 100%; /* Make textarea take full width */
+            }
+        
+            .universal-chat-modal-content button {
+                align-self: flex-start; /* Align the button to the left */
+            }
+        
+            /* Reduced size for the modal */
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1000;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                background: white;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                width: 50%; /* Reduced width */
+                max-width: 500px; /* Set a max width */
+                height: auto; /* Let the height adjust automatically */
+            }
+        
+            /* Additional styles for universal chat */
+            .universal-chat-messages .received .you {
+                background:rgba(255, 255, 255, 0.3);;
+                color: green; /* Optional: for special emphasis on "you" */
+            }
+       
+    </style>
+
+</head>
+<body>
+    
+    <header class="header" style="position: fixed; top: 0; left: 0; width: 100%; height: 10vh; padding: 0 10px; display: flex; align-items: center;  z-index: 1000;">
+        <nav style="font-size: 18px; background-color: #f4f4f4; padding: 10px;">
+            <ul style="display: flex; list-style-type: none; margin: 0; padding: 0;">
+                <li style="margin-right: 20px;">
+                    <a href="{{ url_for('home') }}" style="text-decoration: none; color: black;">Home</a>
+                </li>
+                <li style="margin-right: 20px;">
+                    <a href="{{ url_for('diseases') }}" style="text-decoration: none; color: black;">Common crop diseases</a>
+                </li>
+                <li style="margin-right: 20px;">
+                    <a href="{{ url_for('aboutus') }}" style="text-decoration: none; color: black;">About Us</a>
+                </li>
+                <li style="margin-right: 20px;">
+                    <a href="{{ url_for('contactus') }}" style="text-decoration: none; color: black;">Contact Us</a>
+                </li>
+                <li style="margin-right: 20px;">
+                    <a href="{{ url_for('requests') }}" style="text-decoration: none; color: black;">Contact with pathanologists</a>
+                </li>
+            </ul>
+        </nav>
+    <div class="controls" style="display: flex; align-items: center; justify-content: space-between; flex-grow: 1;">
+        <form id="language-form" style="display: flex;size:15px; align-items: center;">
+            <select id="language-select" name="language" style="font-size: 14   px; padding: 3px;">
+                {% for code, lang in languages.items() %}
+                <option value="{{ code }}" {% if session.get('selected_lang_code') == code %}selected{% endif %}>
+                    {{ lang.capitalize() }}
+                </option>
+                {% endfor %}
+            </select>
+            <button type="submit" class="btn" style="font-size: 10px; padding: 3px 6px; height: 25px; display: flex; align-items: center;">
+                <span style="font-size: 17px; margin-right: 4px;">🌍</span> Select Language
+            </button>
+        </form>
+        
+        <a href="/logout" class="btn logout-btn" style="font-size: 20px; padding: 3px 6px; height: 22px; line-height: 18px;">Logout</a>
+    </div>
+</header>
+
+    <br><br><br><br><br><br>
+    
+    <div class="video-container">
+        <video autoplay loop muted>
+            <source src="{{ url_for('static', filename='video1.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    <div class="container" style="color: black">
+        <div id="chat-modal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 50%; top: 50%; transform: translate(-50%, -50%); background: rgba(255, 255, 255, 0.8); padding: 15px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); width: 400px; max-width: 90%;">
+            <div class="modal-content" style="display: flex; flex-direction: column; gap: 8px; width: 100%;">
+                <span class="close" onclick="closeAllModals()" style="color: red; font-size: 18px; font-weight: bold; cursor: pointer; position: absolute; left: 10px; top: 10px; background: white; border: 2px solid red; border-radius: 50%; padding: 3px;">&times;</span>
+        
+                <h3 style="text-align: left; margin: 0;">    Ask AI a Question:</h3>
+                <div class="chat-messages" id="chat-messages" style="display: flex; flex-direction: column; gap: 8px; padding: 5px; max-height: 50vh; overflow-y: auto; width: 100%; border: 1px solid #ddd; border-radius: 5px;"></div>
+                <textarea id="prompt" placeholder="Type your question..." style="resize: none; height: 60px; width: 100%; padding: 5px; border-radius: 5px; border: 1px solid #ccc; font-size: 14px;"></textarea>
+                <button class="btn" onclick="generateResponse()" style="align-self: flex-start; padding: 8px 15px; background-color: #007bff; color: white; border: none; border-radius: 5px;">Submit</button>
+            </div>
+        </div>
+        
+
+        <div id="universal-chat-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeAllModals()">&times;</span>
+                <h3>Universal Chat</h3>
+                <div id="universal-chat-messages" class="universal-chat-messages"></div>
+                <textarea id="chat-input" placeholder="Type your message..."></textarea>
+                <button class="btn" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+
+            <div id="video-modal" class="modal">
+            <div class="modal-content" style="width: 80%; max-width: 1000px; margin: 0 auto; height: 70vh; overflow-y: auto;">
+                <span class="close" onclick="closeAllModals()">&times;</span>
+                <h2>Search for Agricultural Videos</h2>
+                <input type="text" id="query" placeholder="Enter search term..." style="width: 100%; padding: 10px; margin-bottom: 20px;" />
+                <button class="btn" onclick="searchVideos()" style="padding: 10px 20px; margin-bottom: 20px;">Search</button>
+                <h3>Relevant Videos</h3>
+                <div id="video-container" style="display: flex; justify-content: flex-start; gap: 15px; flex-wrap: wrap; overflow-x: auto; margin-top: 10px; padding: 10px;">
+                    <!-- Videos will be displayed here -->
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+    
+    <footer class="footer" style="position: fixed; bottom: 0; width: 100%; display: flex; justify-content: space-between; gap: 20px; padding: 10px 0; background: rgba(0, 0, 0, 0.2);">
+        <!-- Left aligned buttons -->
+        <div style="display: flex; gap: 15px;">
+            <button class="btn" onclick="openSingleModal('chat-modal')" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: transform 0.3s ease-in-out;">
+                <i class="fa-solid fa-comments" style="margin-right: 8px;"></i> Chat
+            </button>
+            <button class="btn" onclick="openSingleModal('video-modal')" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: transform 0.3s ease-in-out;">
+                <i class="fa-solid fa-video" style="margin-right: 8px;"></i> Video
+            </button>
+            <button class="btn" onclick="openSingleModal('universal-chat-modal')" style="padding: 10px 20px; background-color: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: transform 0.3s ease-in-out;">
+                <i class="fa-solid fa-globe" style="margin-right: 8px;"></i> Universal Chat
+            </button>
+        </div>
+        
+        <!-- Right aligned buttons -->
+        <div style="display: flex; gap: 15px; margin-left: auto;">
+            <!-- <button class="btn" onclick="window.open('https://huggingface.co/spaces/sana000dasaradha/pest_detection', '_blank')" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: transform 0.3s ease-in-out;">
+                <i class="fa-solid fa-bug" style="margin-right: 8px;"></i> Pest Detection
+            </button>
+            <button class="btn" onclick="window.open('https://huggingface.co/spaces/sana000dasaradha/disease_detection', '_blank')" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: transform 0.3s ease-in-out;">
+                <i class="fa-solid fa-leaf" style="margin-right: 8px;"></i> Leaf Disease Detection
+            </button> -->
+
+            <button class="btn" onclick="window.location.href='https://huggingface.co/spaces/BunnyHSR/bunnyleaf'" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; transition: transform 0.3s ease-in-out;">
+                <i class="fa-solid fa-leaf" style="margin-right: 8px;"></i> Leaf Disease Detection
+            </button>
+            
+        </div>
+    </footer>
+    
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            closeAllModals();
+        });
+
+        function openSingleModal(modalId) {
+            closeAllModals();
+            document.getElementById(modalId).style.display = "block";
+        }
+
+        function closeAllModals() {
+            let modals = document.getElementsByClassName("modal");
+            for (let modal of modals) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+    
+    <script>
+        document.getElementById("language-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let selectedLangCode = document.getElementById("language-select").value;
+
+            fetch("/set_language", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ language: selectedLangCode })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("selected-language").innerText = data.language;
+            })
+            .catch(error => console.error("Error setting language:", error));
+        });
+    </script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='modal.css') }}">
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="{{ url_for('static', filename='script2.js') }}"></script>
+    <script src="{{ url_for('static', filename='script3.js') }}"></script>
+</body>
+</html>

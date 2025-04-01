@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Pest Detection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+        }
+        .container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+        /* Fixed Home Button at the top right */
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .home-btn:hover {
+            background-color: #4cae4c;
+        }
+        h1 {
+            color: #2e7d32;
+            margin-bottom: 20px;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 10px;
+            width: 60%;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .info-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .info-box {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 18px;
+            color: #555;
+        }
+        .info-box i {
+            font-size: 24px;
+            color: #2e7d32;
+        }
+        .social-icons {
+            margin-top: 20px;
+        }
+        .social-icons a {
+            text-decoration: none;
+            color: #4caf50;
+            font-size: 30px;
+            margin: 0 15px;
+        }
+        .social-icons a:hover {
+            color: #1b5e20;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">Home</a>
+    <div class="container">
+
+        <h1><i class="fas fa-envelope"></i> Contact Us</h1>
+        <p>We're here to help! Feel free to reach out if you have any questions or need assistance.</p>
+        <div class="contact-info">
+            <div class="info-row">
+                <div class="info-box">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Mohan Babu University, Rangampet, Tirupati, India</span>
+                </div>
+            </div>
+            <div class="info-row">
+                <div class="info-box">
+                    <i class="fas fa-phone-alt"></i>
+                    <span>+91 9014674705</span>
+                </div>
+                <div class="info-box">
+                    <i class="fas fa-envelope"></i>
+                    <span>support@pestdetection.com</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Pest Detection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: Arial, sans-serif;
+            
+        }
+        .container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            text-align: center;
+            padding: 20px;
+        }
+        /* Fixed Home Button at the top right */
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .home-btn:hover {
+            background-color: #4cae4c;
+        }
+        h1, h2 {
+            color: #2e7d32;
+        }
+        p {
+            font-size: 20px;
+            color: #555;
+            line-height: 1.5;
+            width: 100%;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            overflow-y: visible; /* Enable vertical scrolling */
+            overflow-x: hidden;
+        }
+        .icon {
+            font-size: 50px;
+            color: #4caf50;
+            margin: 10px;
+        }
+        .team-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .team-member {
+            text-align: center;
+        }
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #4caf50;
+        }
+        .team-member p {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .social-icons {
+            margin-top: 20px;
+        }
+        .social-icons a {
+            text-decoration: none;
+            color: #4caf50;
+            font-size: 30px;
+            margin: 0 15px;
+        }
+        .social-icons a:hover {
+            color: #1b5e20;
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="home-btn">Home</a>
+    <div class="container">
+        <h1><i class="fas fa-leaf"></i> About Us</h1>
+        <p>We are a group of Artificail Intelligence & Machine Learning enthusiasts, data scientists who are passionate about applying technology to solve real-world AI-related problems. Our interdisciplinary approach combines expertise in Machine learning,computer vision, deep learning, and agronomy to create a robust and efficient pest and disease detection system.</p>
+        
+        <div class="mission">
+            <h1><i class="fas fa-seedling"></i> Our Mission</h1>
+            <p>
+                Our mission is to cultivate a thriving community of data science and AI. Through hands-on projects, technical workshops, and collaborative learning, we aim to bridge the gap between theoretical concepts and real-world applications. By fostering innovation, critical thinking, and teamwork, we strive to create a platform where students can explore, experiment, and contribute to the future of AI and data science
+            </p>
+        </div>
+        
+        <div class="team">
+            <h1><i class="fas fa-users"></i> Meet Our Team</h1>
+            <div class="team-container">
+                <div class="team-member">
+                    <img src="https://media.licdn.com/dms/image/v2/D5603AQG5Xwby-eefTA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1724676816802?e=1748476800&v=beta&t=UVMjbd78eM3-4Tzj5mflaxJVtetsU6oz5CkQfElooRU" alt="Rama Krishna">
+                    <p><a href="https://www.linkedin.com/in/sankavaram-rama-krishna-bb93aa254/">Rama Krishna</a></p>
+                </div>
+                <div class="team-member">
+                    <img src="https://avatars.githubusercontent.com/u/158816242?v=4" alt="Hema Sai Reddy">
+                    <p><a href="https://www.linkedin.com/in/hemasai-reddy-294ab8288/">Hema Sai Reddy</a></p>
+                </div>
+                <div class="team-member">
+                    <img src="data:image/jpeg;base64,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" alt="Dasaradharami Reddy">
+                    <p><a href="https://www.linkedin.com/in/sana-dasaradharami-reddy-b6027126b/">Dasaradharami Reddy</a></p>
+                </div>
+                <div class="team-member">
+                    <img src="https://media.licdn.com/dms/image/v2/D5603AQEsfD9CH2ZNJA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1724677404791?e=1748476800&v=beta&t=VMnf7EJriUHZXCqevXXtorPeu4svAzDhGNH1pPhsqfA" alt="Swami Siva Rama Raju">
+                    <p><a href="https://www.linkedin.com/in/gorrela-swami-siva-rama-raju-07a570291/">Swami Siva Rama Raju</a></p>
+                </div>
+            </div>
+        </div>
+
+    
+    </div>
+</body>
+</html>

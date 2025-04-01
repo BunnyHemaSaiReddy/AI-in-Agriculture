@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pathologist Requests</title>
+    <link rel="stylesheet" href="path_to_your_css_file.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #333;
+        }
+        h2 {
+            color: #555;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .table-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #5cb85c;
+            color: white;
+        }
+        td {
+            background-color: #f9f9f9;
+        }
+        .btn {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .btn:hover {
+            background-color: #4cae4c;
+        }
+        .alert {
+            text-align: center;
+            padding: 10px;
+            background-color: #f8d7da;
+            color: #721c24;
+            margin-top: 20px;
+        }
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        label {
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        input, textarea, select {
+            padding: 8px;
+            font-size: 14px;
+            margin-top: 5px;
+            width: 100%;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        button {
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            align-items: center;
+            justify-content: center;
+        }
+        .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Fixed Home Button at the top right */
+        .home-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #5cb85c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .home-btn:hover {
+            background-color: #4cae4c;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Home Button -->
+    <a href="/" class="home-btn">Home</a>
+
+    <h1>Pathologist Requests</h1>
+
+    <!-- Display alert message if any error occurred -->
+    {% if error %}
+    <div class="alert">
+        {{ error }}
+    </div>
+    {% endif %}
+
+    <!-- Pathologist Table -->
+    <h2>Available Pathologists</h2>
+    <div class="table-container">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Specialization</th>
+                <th>Phone Number</th>
+                <th>Clinic Name</th>
+                <th>Experience</th>
+            </tr>
+            {% for pathologist in pathologists %}
+            <tr>
+                <td>{{ pathologist.Name }}</td>
+                <td>{{ pathologist.Specialization }}</td>
+                <td>{{ pathologist.Phone_Number }}</td>
+                <td>{{ pathologist.Clinic_Name }}</td>
+                <td>{{ pathologist.Experience }} years</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <!-- Request Form -->
+    <h2>Request a Pathologist</h2>
+    <form action="/submit_request" method="POST" class="form-container" onsubmit="showPopup(event)">
+        <label for="farmer_name">Farmer Name:</label>
+        <input type="text" id="farmer_name" name="farmer_name" required>
+
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" id="phone_number" name="phone_number" required>
+
+        <label for="place">Place:</label>
+        <input type="text" id="place" name="place" required>
+
+        <label for="explanation">Explanation:</label>
+        <textarea id="explanation" name="explanation" required></textarea>
+
+        <label for="doctor_id">Choose Pathologist:</label>
+        <select id="doctor_id" name="doctor_id" required>
+            {% for pathologist in pathologists %}
+            <option value="{{ pathologist.ID }}">{{ pathologist.Name }}</option>
+            {% endfor %}
+        </select>
+
+        <button type="submit" class="btn">Submit Request</button>
+    </form>
+
+    <!-- Popup Confirmation -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <h3>Request Submitted!</h3>
+            <p>Your request has been successfully submitted.</p>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+
+    <script>
+        function showPopup(event) {
+            event.preventDefault(); // Prevent form submission for now
+            // Show the popup
+            document.getElementById('popup').style.display = 'flex';
+
+            // Simulate form submission (this can be replaced with actual form submission code)
+            setTimeout(() => {
+                // Hide the popup after 3 seconds
+                document.getElementById('popup').style.display = 'none';
+            }, 3000);
+        }
+
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
