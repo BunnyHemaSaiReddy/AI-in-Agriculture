@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Peta Hema Sai Reddy</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .projects-section {
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .project-card {
+            background: var(--card);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.2);
+        }
+        
+        .project-card-image {
+            position: relative;
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .project-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-card-image img {
+            transform: scale(1.1);
+        }
+        
+        .project-emoji {
+            position: absolute;
+            bottom: -25px;
+            left: 20px;
+            height: 50px;
+            width: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover .project-emoji {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .project-card-content {
+            padding: 2rem 1.5rem 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        
+        .project-card:hover .project-card-title {
+            color: var(--primary);
+        }
+        
+        .project-card-description {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            flex: 1;
+        }
+        
+        .project-card-technologies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-card-technology {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover .project-card-technology {
+            background: rgba(99, 102, 241, 0.2);
+        }
+        
+        .project-card-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+            margin-top: auto;
+        }
+        
+        .project-card-link-text {
+            font-weight: 500;
+            color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .project-card-link-icon {
+            width: 30px;
+            height: 30px;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover .project-card-link-text {
+            color: var(--primary-dark);
+        }
+        
+        .project-card:hover .project-card-link-icon {
+            background: var(--primary);
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 2rem;
+        }
+        
+        .filter-button {
+            padding: 0.5rem 1.25rem;
+            border-radius: 50px;
+            border: none;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--text-primary);
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-button:hover, .filter-button.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        /* Dark theme adjustments */
+        .dark-theme .project-card {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark-theme .project-card-link {
+            border-top-color: rgba(255, 255, 255, 0.05);
+        }
+        
+        .dark-theme .project-card-technology {
+            background: rgba(99, 102, 241, 0.15);
+        }
+        
+        .dark-theme .filter-button {
+            background: rgba(99, 102, 241, 0.15);
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body class="dark-theme">
+    <!-- Header -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="index.html" class="logo">Peta Hema Sai Reddy</a>
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="education.html" class="nav-link">Education</a></li>
+                    <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+                    <li><a href="internships.html" class="nav-link">Internships</a></li>
+                    <li><a href="projects.html" class="nav-link active">Projects</a></li>
+                    <li><a href="certificates.html" class="nav-link">Certifications</a></li>
+                    <li><a href="remain/certificates.html" class="nav-link">Certificates</a></li>
+                </ul>
+                
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title animate-fadeInUp">My Projects Portfolio</h1>
+                <p class="section-subtitle animate-fadeInUp delay-1">Explore my work in AI, Machine Learning, and Web Development</p>
+            </div>
+            
+            <div class="filter-container animate-fadeInUp delay-2">
+                <button class="filter-button active" data-filter="all">All Projects</button>
+                <button class="filter-button" data-filter="ai-ml">AI & ML</button>
+                <button class="filter-button" data-filter="web">Web Development</button>
+                <button class="filter-button" data-filter="computer-vision">Computer Vision</button>
+                <button class="filter-button" data-filter="nlp">NLP</button>
+            </div>
+            
+            <div class="projects-grid">
+                <!-- Project 1 -->
+                <a href="project.html#skill-builder" class="project-card animate-fadeInUp delay-2" data-category="ai-ml web">
+                    <div class="project-card-image">
+                        <img src="tu.png" alt="Skill Builder and Learning through AI">
+                        <div class="project-emoji">📚</div>
+                    </div>
+                    <div class="project-card-content">
+                        <h3 class="project-card-title">Skill Builder and Learning through AI</h3>
+                        <p class="project-card-description">
+                            An educational tool that integrates AI to personalize learning paths and recommend skill-enhancing resources.
+                        </p>
+                        <div class="project-card-technologies">
+                            <span class="project-card-technology">AI</span>
+                            <span class="project-card-technology">Python</span>
+                            <span class="project-card-technology">EdTech</span>
+                        </div>
+                        <div class="project-card-link">
+                            <span class="project-card-link-text">View Project Details</span>
+                            <div class="project-card-link-icon">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Project 2 -->
+                <a href="project.html#agriculture" class="project-card animate-fadeInUp delay-3" data-category="ai-ml computer-vision">
+                    <div class="project-card-image">
+                        <img src="agro.png" alt="AI in Agriculture">
+                        <div class="project-emoji">🌾</div>
+                    </div>
+                    <div class="project-card-content">
+                        <h3 class="project-card-title">AI in Agriculture</h3>
+                        <p class="project-card-description">
+                            This project implements AI to monitor crop health, predict yields, and suggest best farming practices.
+                        </p>
+                        <div class="project-card-technologies">
+                            <span class="project-card-technology">Image Classification</span>
+                            <span class="project-card-technology">Python</span>
+                            <span class="project-card-technology">Agriculture</span>
+                        </div>
+                        <div class="project-card-link">
+                            <span class="project-card-link-text">View Project Details</span>
+                            <div class="project-card-link-icon">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Project 3 -->
+                <a href="project.html#blood-donation" class="project-card animate-fadeInUp delay-4" data-category="web">
+                    <div class="project-card-image">
+                        <img src="blood.png" alt="Blood Donation Portal">
+                        <div class="project-emoji">🩸</div>
+                    </div>
+                    <div class="project-card-content">
+                        <h3 class="project-card-title">Blood Donation Portal</h3>
+                        <p class="project-card-description">
+                            An interactive web portal designed to connect blood donors with recipients, featuring profile management and donor search.
+                        </p>
+                        <div class="project-card-technologies">
+                            <span class="project-card-technology">Web Development</span>
+                            <span class="project-card-technology">Database</span>
+                            <span class="project-card-technology">Healthcare</span>
+                        </div>
+                        <div class="project-card-link">
+                            <span class="project-card-link-text">View Project Details</span>
+                            <div class="project-card-link-icon">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Project 4 -->
+                <a href="project.html#facial-recognition" class="project-card animate-fadeInUp delay-5" data-category="ai-ml computer-vision">
+                    <div class="project-card-image">
+                        <img src="image.jpeg" alt="Image Detection and Facial Recognition">
+                        <div class="project-emoji">📸</div>
+                    </div>
+                    <div class="project-card-content">
+                        <h3 class="project-card-title">Image Detection and Facial Recognition</h3>
+                        <p class="project-card-description">
+                            This project leverages computer vision techniques using facial recognition methods such as eigenfaces, PCA, and machine learning classifiers.
+                        </p>
+                        <div class="project-card-technologies">
+                            <span class="project-card-technology">Computer Vision</span>
+                            <span class="project-card-technology">Python</span>
+                            <span class="project-card-technology">Machine Learning</span>
+                        </div>
+                        <div class="project-card-link">
+                            <span class="project-card-link-text">View Project Details</span>
+                            <div class="project-card-link-icon">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                <!-- Project 5 -->
+                <a href="project.html#chatbot" class="project-card animate-fadeInUp delay-6" data-category="ai-ml nlp">
+                    <div class="project-card-image">
+                        <img src="chat.png" alt="Chat Bot and More">
+                        <div class="project-emoji">🤖</div>
+                    </div>
+                    <div class="project-card-content">
+                        <h3 class="project-card-title">Chat Bot and More...</h3>
+                        <p class="project-card-description">
+                            An AI-powered chatbot built using NLP techniques, offering assistance for students and users across portals.
+                        </p>
+                        <div class="project-card-technologies">
+                            <span class="project-card-technology">NLP</span>
+                            <span class="project-card-technology">Python</span>
+                            <span class="project-card-technology">AI</span>
+                        </div>
+                        <div class="project-card-link">
+                            <span class="project-card-link-text">View Project Details</span>
+                            <div class="project-card-link-icon">
+                                <i class="fas fa-arrow-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3 class="footer-heading">Peta Hema Sai Reddy</h3>
+                    <p>AIML Student & Python Developer passionate about creating innovative solutions and solving real-world problems.</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/hemasai-reddy-294ab8288/" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/BunnyHemaSaiReddy/" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://leetcode.com/u/Pete_HemaSaiReddy/" class="social-link" target="_blank"><i class="fas fa-code"></i></a>
+                        <a href="https://www.credly.com/users/hema-sai-reddy/" class="social-link" target="_blank"><i class="fas fa-trophy"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links-container">
+                    <div class="footer-links-column">
+                        <h3 class="footer-heading">Quick Links</h3>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="index.html">Home</a></li>
+                            <li class="footer-link"><a href="education.html">Education</a></li>
+                            <li class="footer-link"><a href="projects.html">Projects</a></li>
+                            <li class="footer-link"><a href="internships.html">Internships</a></li>
+                            <li class="footer-link"><a href="certificates.html">Certifications</a></li>
+                            <li class="footer-link"><a href="achievements.html">Achievements</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-column">
+                        <h3 class="footer-heading">Contact</h3>
+                        <ul class="footer-links">
+                            <li class="footer-contact-item"><i class="fas fa-envelope"></i> bunnyhemasaireddy@gmail.com</li>
+                            <li class="footer-contact-item"><i class="fas fa-phone"></i> 6300030941</li>
+                            <li class="footer-contact-item"><i class="fas fa-map-marker-alt"></i> Pakala Mandal, Tirupati District, AP</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Peta Hema Sai Reddy. All Rights Reserved.</p>
+            </div>
+        </div>
+        <a href="#" class="back-to-top" id="back-to-top">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+    </footer>
+
+    <!-- JavaScript for interactivity -->
+    <script src="script.js"></script>
+    <script>
+        // Project filtering functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterButtons = document.querySelectorAll('.filter-button');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    // Get filter value
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    // Filter projects
+                    projectCards.forEach(card => {
+                        if (filterValue === 'all' || card.getAttribute('data-category').includes(filterValue)) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects - Peta Hema Sai Reddy</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        .projects-section {
+            padding: var(--spacing-2xl) 0;
+        }
+        
+        .project-card {
+            background: var(--card);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.2);
+        }
+        
+        .project-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .project-emoji {
+            font-size: 2.5rem;
+            background: rgba(99, 102, 241, 0.1);
+            height: 60px;
+            width: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .project-card:hover .project-emoji {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .project-title {
+            margin: 0;
+            font-size: 1.6rem;
+            color: var(--text-primary);
+        }
+        
+        .project-content {
+            padding: 1.5rem 2rem;
+        }
+        
+        .project-description {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        
+        .project-details {
+            background-color: rgba(99, 102, 241, 0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-details p {
+            margin-bottom: 0.75rem;
+        }
+        
+        .project-details strong {
+            color: var(--primary);
+        }
+        
+        .project-images {
+            display: flex;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .project-image {
+            flex: 1;
+            min-width: 250px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            border-radius: 50px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .project-demo-link {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .project-demo-link:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+        
+        .project-code-link {
+            background-color: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+        }
+        
+        .project-code-link:hover {
+            background-color: rgba(99, 102, 241, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .project-video {
+            margin: 1.5rem 0;
+            width: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .project-video video {
+            width: 100%;
+        }
+        
+        .section-header {
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .section-subtitle {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            color: var(--primary-dark);
+            transform: translateX(-5px);
+        }
+        
+        /* Dark theme adjustments */
+        .dark-theme .project-card {
+            border-left-color: var(--primary);
+        }
+        
+        .dark-theme .project-emoji {
+            background: rgba(99, 102, 241, 0.2);
+        }
+        
+        .dark-theme .project-details {
+            background-color: rgba(99, 102, 241, 0.1);
+        }
+        
+        .dark-theme .project-code-link {
+            background-color: rgba(99, 102, 241, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container navbar">
+            <a href="index.html" class="logo">Peta Hema Sai Reddy</a>
+            <nav>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="education.html" class="nav-link">Education</a></li>
+                    <li><a href="achievements.html" class="nav-link">Achievements</a></li>
+                    <li><a href="internships.html" class="nav-link">Internships</a></li>
+                    <li><a href="projects.html" class="nav-link active">Projects</a></li>
+                    <li><a href="certificates.html" class="nav-link">Certifications</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Projects Section -->
+    <section class="projects-section">
+        <div class="container">
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
+            
+            <div class="section-header">
+                <h1 class="section-title animate-fadeInUp">My Projects Showcase</h1>
+                <p class="section-subtitle animate-fadeInUp delay-1">Explore my portfolio of AI & ML projects, showcasing practical applications and innovative solutions.</p>
+            </div>
+            
+            <!-- Project 1 -->
+            <div id="skill-builder" class="project-card animate-fadeInUp delay-2">
+                <div class="project-header">
+                    <div class="project-emoji">📚</div>
+                    <h2 class="project-title">Skill Builder and Learning through AI</h2>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        An educational tool that integrates AI to personalize learning paths, analyze student performance, and recommend skill-enhancing resources. It supports certifications, internships, and project-based learning experiences from platforms like IBM SkillBuild and GreatLearn.
+                    </p>
+                    <div class="project-video">
+                        <video width="100%" controls muted>
+                            <source src="tutor.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="project-links">
+                        <a href="" class="project-link project-demo-link"><i class="fas fa-external-link-alt"></i> View Demo</a>
+                        <a href="https://github.com/BunnyHemaSaiReddy/Online-course-portal" class="project-link project-code-link" target="_blank"><i class="fas fa-code"></i> View Code</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div id="agriculture" class="project-card animate-fadeInUp delay-3">
+                <div class="project-header">
+                    <div class="project-emoji">🌾</div>
+                    <h2 class="project-title">AI in Agriculture</h2>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        This project implements AI to monitor crop health, predict yields, and suggest best farming practices. It uses image classification, weather data, and soil analysis to improve decision-making for farmers.
+                    </p>
+                    <div class="project-video">
+                        <video width="100%" controls muted>
+                            <source src="agro.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+
+                    <div class="project-links">
+                        <a href="https://bunnyai-agro.onrender.com/" target="_blank" class="project-link project-demo-link"><i class="fas fa-external-link-alt"></i> View Live Project</a>
+                        <a href="https://github.com/BunnyHemaSaiReddy/AI-in-Agriculture" class="project-link project-code-link"><i class="fas fa-code"></i> View Code</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div id="blood-donation" class="project-card animate-fadeInUp delay-4">
+                <div class="project-header">
+                    <div class="project-emoji">🩸</div>
+                    <h2 class="project-title">Blood Donation Portal</h2>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        An interactive web portal designed to connect blood donors with recipients. It includes features like profile management, donor search by blood group, donation request tracking, and integrated messaging. It prioritizes emergency handling and user-friendly interaction.
+                    </p>
+                    
+                    <div class="project-video">
+                        <video width="100%" controls muted>
+                            <source src="blood.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    
+                    <div class="project-links">
+                        <a href="https://github.com/BunnyHemaSaiReddy/Blood-Donation-portal" target="_blank" class="project-link project-code-link"><i class="fab fa-github"></i> View on GitHub</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 4 -->
+            <div id="facial-recognition" class="project-card animate-fadeInUp delay-5">
+                <div class="project-header">
+                    <div class="project-emoji">📸</div>
+                    <h2 class="project-title">Image Detection and Facial Recognition</h2>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        This project leverages computer vision techniques using facial recognition methods such as eigenfaces, PCA, and machine learning classifiers (e.g. Decision Trees and MLP). The system processes images by converting them to grayscale, resizing to a fixed dimension, flattening into feature vectors, and then reducing dimensions to highlight key features before classification.
+                    </p>
+                    
+                    <div class="project-details">
+                        <p><strong>Dataset Details:</strong> Number of samples: 190. Total dataset size: n_samples = 190, n_features = 90,000, n_classes = 190</p>
+                        <p><strong>Processing Details:</strong> Extracted the top 15 eigenfaces from 142 faces. Projected the input data on the eigenfaces orthonormal basis. Project completed successfully.</p>
+                        <p><strong>Model Evaluation:</strong> Accuracy: 95.83%</p>
+                    </div>
+                    
+                    <div class="project-images">
+                        <div class="project-image">
+                            <img src="image.jpeg" alt="Result Image 1">
+                        </div>
+                        <div class="project-image">
+                            <img src="image2..jpeg" alt="Result Image 2">
+                        </div>
+                    </div>
+                    
+                    <p class="project-description">
+                        This system integrates a full pipeline from image processing to model training, offering robust performance for facial recognition tasks. It can be extended to different domains requiring object detection or identification.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Project 5 -->
+            <div id="chatbot" class="project-card animate-fadeInUp delay-6">
+                <div class="project-header">
+                    <div class="project-emoji">🤖</div>
+                    <h2 class="project-title">Chat Bot and More...</h2>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        An AI-powered chatbot built using NLP techniques, offering assistance for students and users across portals. It can answer FAQs, provide document suggestions, and guide users through portals like blood donation systems.
+                    </p>
+                    <div class="project-video">
+                        <video width="100%" controls muted>
+                            <source src="chat.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://usebunny-2004.onrender.com/" target="_blank" class="project-link project-demo-link"><i class="fas fa-external-link-alt"></i> Chat with multiple languages</a>
+                        <a href="https://bunny-analysis.onrender.com/"  target="_blank"class="project-link project-demo-link"><i class="fas fa-code"></i> About Files</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-wave">
+            <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" class="shape-fill"></path>
+                <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" class="shape-fill"></path>
+                <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" class="shape-fill"></path>
+            </svg>
+        </div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3 class="footer-heading">Peta Hema Sai Reddy</h3>
+                    <p>AIML Student & Python Developer passionate about creating innovative solutions and solving real-world problems.</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/hemasai-reddy-294ab8288/" class="social-link" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/BunnyHemaSaiReddy/" class="social-link" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://leetcode.com/u/Pete_HemaSaiReddy/" class="social-link" target="_blank"><i class="fas fa-code"></i></a>
+                        <a href="https://www.credly.com/users/hema-sai-reddy/" class="social-link" target="_blank"><i class="fas fa-trophy"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links-container">
+                    <div class="footer-links-column">
+                        <h3 class="footer-heading">Quick Links</h3>
+                        <ul class="footer-links">
+                            <li class="footer-link"><a href="index.html">Home</a></li>
+                            <li class="footer-link"><a href="education.html">Education</a></li>
+                            <li class="footer-link"><a href="projects.html">Projects</a></li>
+                            <li class="footer-link"><a href="internships.html">Internships</a></li>
+                            <li class="footer-link"><a href="certificates.html">Certifications</a></li>
+                            <li class="footer-link"><a href="achievements.html">Achievements</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-links-column">
+                        <h3 class="footer-heading">Contact</h3>
+                        <ul class="footer-links">
+                            <li class="footer-contact-item"><i class="fas fa-envelope"></i> bunnyhemasaireddy@gmail.com</li>
+                            <li class="footer-contact-item"><i class="fas fa-phone"></i> 6300030941</li>
+                            <li class="footer-contact-item"><i class="fas fa-map-marker-alt"></i> Pakala Mandal, Tirupati District, AP</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Peta Hema Sai Reddy. All Rights Reserved.</p>
+            </div>
+        </div>
+        <a href="#" class="back-to-top" id="back-to-top">
+            <i class="fas fa-arrow-up"></i>
+        </a>
+    </footer>
+
+    <!-- JavaScript for interactivity -->
+    <script src="script.js"></script>
+</body>
+</html>
