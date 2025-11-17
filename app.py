@@ -9,7 +9,7 @@ from googletrans import Translator,LANGUAGES
 import os
 #import dotenv
 
-api_key = os.getenv("API_KEY")
+api_key = "AIzaSyCNDmLZftLXyqEFaghwN-TbIunypdBWH9g"
 
 # Get database configuration from environment variables
 db_config = {
@@ -48,7 +48,7 @@ def fetch_youtube_links(query, num_results=3):
 # API Key for Gemini AI
 API_KEY = "AIzaSyCEn5YfcEEUnKFTRhLYXO-ebLrAmSW6AUE"
 genai.configure(api_key=API_KEY)
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-2.5-flash")
 
 app = Flask(__name__)
 
@@ -352,3 +352,4 @@ def submit_request():
 # Run Flask App
 if __name__ == "__main__":
     app.run(debug=True)
+
