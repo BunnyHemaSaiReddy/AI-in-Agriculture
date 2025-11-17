@@ -46,7 +46,7 @@ def fetch_youtube_links(query, num_results=3):
     video_links = [result.watch_url for result in results[:num_results]]    
     return video_links
 # API Key for Gemini AI
-API_KEY = "AIzaSyCEn5YfcEEUnKFTRhLYXO-ebLrAmSW6AUE"
+API_KEY = "AIzaSyCNDmLZftLXyqEFaghwN-TbIunypdBWH9g"
 genai.configure(api_key=API_KEY)
 model = genai.GenerativeModel("gemini-2.5-flash")
 
@@ -352,4 +352,5 @@ def submit_request():
 # Run Flask App
 if __name__ == "__main__":
     app.run(debug=True)
+
 
